@@ -1,0 +1,115 @@
+# 拖延症AI助手 - Git忽略文件
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+# Python lib目录（但不包括Flutter的lib目录）
+/lib/
+/lib64/
+
+# 允许Flutter项目的lib目录
+!/flutter_ai_assistant/lib/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 虚拟环境
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# 环境变量文件
+.env
+.env.local
+.env.development
+.env.production
+
+# 数据库
+*.db
+*.sqlite3
+*.sqlite
+
+# 日志文件
+*.log
+logs/
+
+# IDE和编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+
+# 上传文件
+uploads/
+static/uploads/
+
+# 缓存
+.cache/
+.pytest_cache/
+
+# 覆盖率报告
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# 前端依赖和构建
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+
+# 前端构建产物
+frontend/dist/
+frontend/build/
+
+# 备份文件
+*.bak
+*.backup
+
+# 配置文件（包含敏感信息）
+config/production.py
+config/local.py
+
+# SSL证书
+*.pem
+*.key
+*.crt
+
+# Docker
+.dockerignore
+Dockerfile.prod

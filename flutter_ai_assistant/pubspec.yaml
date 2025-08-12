@@ -1,0 +1,75 @@
+name: flutter_ai_assistant
+description: 小AI助手 - 拖延症克星，集成番茄钟和任务管理的智能助手
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # 状态管理
+  provider: ^6.1.1
+
+  # 本地存储
+  shared_preferences: ^2.2.2
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+  # UI组件
+  cupertino_icons: ^1.0.6
+
+  # 工具类
+  intl: ^0.20.2
+
+  # 网络请求
+  http: ^1.1.0
+
+  # 音频播放（番茄钟提示音）
+  audioplayers: ^5.2.1
+
+  # 图表库（统计图表）
+  fl_chart: ^0.66.0
+
+  # Firebase推送通知 - 暂时禁用解决iOS构建问题
+  # firebase_core: ^2.32.0  # 暂时注释解决iOS头文件冲突
+  # firebase_messaging: ^14.7.10  # 暂时注释解决iOS头文件冲突
+  
+  # 本地通知（App Store友好的推送方案）
+  flutter_local_notifications: ^17.2.3
+  timezone: ^0.9.4
+  
+  # 传感器（翻转检测）
+  sensors_plus: ^4.0.2
+  
+  # 震动反馈（番茄钟完成提醒）
+  vibration: ^1.8.4
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.7
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/sounds/
+
+  # fonts:
+  #   - family: Inter
+  #     fonts:
+  #       - asset: assets/fonts/Inter-Regular.ttf

@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "flutter_ai_assistant/pubspec.yaml",
+      "use": "vercel-flutter"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/flutter_ai_assistant/build/web/$1"
+    }
+  ],
+  "functions": {
+    "flutter_ai_assistant/build/web/**": {
+      "includeFiles": "flutter_ai_assistant/build/web/**"
+    }
+  }
+}

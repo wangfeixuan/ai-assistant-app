@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xcode-select:*)",
+      "Bash(xcodebuild:*)",
+      "Bash(flutter:*)",
+      "Bash(brew install:*)",
+      "Bash(xcrun simctl list:*)",
+      "Bash(open:*)",
+      "Bash(pod install:*)",
+      "Bash(pod deintegrate:*)",
+      "Bash(xcrun simctl boot:*)",
+      "Bash(ls:*)",
+      "Bash(system_profiler SPNetworkDataType)",
+      "Bash(python3:*)",
+      "Bash(pg_isready:*)",
+      "Bash(curl:*)",
+      "Bash(find . -name \"*.js\" -o -name \"*.ts\")",
+      "Bash(ping:*)",
+      "Bash(python -c \"import requests; print(''Testing server...''); response = requests.get(''http://192.168.21.169:8000/''); print(f''Status: {response.status_code}'')\")",
+      "Bash(dart:*)",
+      "Bash(find:*)",
+      "Bash(mv:*)",
+      "Bash(cp:*)",
+      "Bash(grep:*)",
+      "WebFetch(domain:pub.dev)",
+      "WebFetch(domain:github.com)",
+      "Bash(pkill:*)",
+      "Bash(sed:*)",
+      "Bash(./start_flutter.sh:*)"
+    ],
+    "deny": []
+  }
+}
