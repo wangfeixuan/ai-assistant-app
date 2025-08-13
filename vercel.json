@@ -1,20 +1,12 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "flutter_ai_assistant/pubspec.yaml",
-      "use": "vercel-flutter"
-    }
-  ],
+  "buildCommand": "cd flutter_ai_assistant && flutter build web --release",
+  "outputDirectory": "flutter_ai_assistant/build/web",
+  "installCommand": "flutter pub get",
+  "framework": null,
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/flutter_ai_assistant/build/web/$1"
+      "dest": "/$1"
     }
-  ],
-  "functions": {
-    "flutter_ai_assistant/build/web/**": {
-      "includeFiles": "flutter_ai_assistant/build/web/**"
-    }
-  }
+  ]
 }
