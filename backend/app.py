@@ -76,8 +76,100 @@ def create_app():
     
     return app
 
+def auto_init_database():
+    """应用启动时自动初始化数据库"""
+    import sqlite3
+    
+    db_path = 'procrastination_ai.db'
+    
+    # 检查数据库是否存在且有内容
+    if not os.path.exists(db_path) or os.path.getsize(db_path) == 0:
+        print("检测到数据库未初始化，开始自动初始化...")
+        
+        try:
+            # 创建数据库连接
+            conn = sqlite3.connect(db_path)
+            cursor = conn.cursor()
+            
+            # 创建用户表
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username VARCHAR(80) UNIQUE NOT NULL,
+                    email VARCHAR(120) UNIQUE NOT NULL,
+                    password_hash VARCHAR(255) NOT NULL,
+                    nickname VARCHAR(50),
+                    avatar_url VARCHAR(255),
+                    theme_preference VARCHAR(20) DEFAULT 'business',
+                    timezone VARCHAR(50) DEFAULT 'Asia/Shanghai',
+                    language VARCHAR(10) DEFAULT 'zh-CN',
+                    is_active BOOLEAN DEFAULT 1,
+                    is_premium BOOLEAN DEFAULT 0,
+                    premium_expires_at DATETIME,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    last_login_at DATETIME
+                )
+            """)
+            
+            # 创建任务表
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS tasks (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    title VARCHAR(200) NOT NULL,
+                    description TEXT,
+                    status VARCHAR(20) DEFAULT 'pending',
+                    priority INTEGER DEFAULT 1,
+                    due_date DATETIME,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users (id)
+                )
+            """)
+            
+            # 创建主题表
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS themes (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name VARCHAR(50) UNIQUE NOT NULL,
+                    display_name VARCHAR(100) NOT NULL,
+                    description TEXT,
+                    is_default BOOLEAN DEFAULT 0,
+                    is_active BOOLEAN DEFAULT 1,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+            
+            # 插入默认主题数据
+            cursor.execute("""
+                INSERT OR IGNORE INTO themes (name, display_name, description, is_default, is_active)
+                VALUES 
+                ('business', '商务风格', '专业简洁的商务风格主题', 1, 1),
+                ('cute', '可爱风格', '温馨可爱的粉色系主题', 0, 1)
+            """)
+            
+            # 创建索引
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_users_username ON users (username)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_users_email ON users (email)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks (user_id)")
+            
+            # 提交更改并关闭连接
+            conn.commit()
+            conn.close()
+            
+            print("✅ 数据库自动初始化完成！")
+            
+        except Exception as e:
+            print(f"❌ 数据库初始化失败: {str(e)}")
+    else:
+        print("数据库已存在，跳过初始化")
+
 if __name__ == '__main__':
     app = create_app()
+    
+    # 自动初始化数据库
+    auto_init_database()
     
     # 启动定时任务调度器（暂时禁用，避免依赖问题）
     # from scheduler import init_scheduler
