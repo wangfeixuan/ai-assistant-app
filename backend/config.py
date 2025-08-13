@@ -12,14 +12,21 @@ class Config:
     # Flask基础配置
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev-secret-key-change-in-production'
     
-    # 数据库配置 - 使用统一的PostgreSQL数据库
-    DATABASE_URL = os.environ.get('DATABASE_URL') or os.environ.get('SQLALCHEMY_DATABASE_URI') or 'postgresql://wangfeixuan@localhost:5432/procrastination_ai'
-    SQLALCHEMY_DATABASE_URI = DATABASE_URL
+    # 数据库配置 - Railway部署时使用环境变量，本地开发使用SQLite
+    DATABASE_URL = os.environ.get('DATABASE_URL') or os.environ.get('SQLALCHEMY_DATABASE_URI')
+    if DATABASE_URL:
+        # 生产环境（Railway）使用PostgreSQL
+        SQLALCHEMY_DATABASE_URI = DATABASE_URL
+        SQLALCHEMY_ENGINE_OPTIONS = {
+            'pool_pre_ping': True,
+            'pool_recycle': 300,
+        }
+    else:
+        # 本地开发使用SQLite
+        SQLALCHEMY_DATABASE_URI = 'sqlite:///procrastination_ai.db'
+        SQLALCHEMY_ENGINE_OPTIONS = {}
+    
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_ENGINE_OPTIONS = {
-        'pool_pre_ping': True,
-        'pool_recycle': 300,
-    }
     
     # JWT认证配置
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY') or 'jwt-secret-change-in-production'
