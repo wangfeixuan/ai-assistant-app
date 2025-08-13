@@ -83,4 +83,6 @@ if __name__ == '__main__':
     # from scheduler import init_scheduler
     # init_scheduler(app)
     
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    # Railway部署时使用PORT环境变量，本地开发使用5001
+    port = int(os.environ.get('PORT', 5001))
+    app.run(debug=False, host='0.0.0.0', port=port)
