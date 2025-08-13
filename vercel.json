@@ -1,12 +1,16 @@
 {
-  "buildCommand": "cd flutter_ai_assistant && flutter build web --release",
+  "buildCommand": "echo 'Using pre-built Flutter Web files'",
   "outputDirectory": "flutter_ai_assistant/build/web",
-  "installCommand": "flutter pub get",
+  "installCommand": "echo 'No install needed'",
   "framework": null,
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))",
       "dest": "/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
