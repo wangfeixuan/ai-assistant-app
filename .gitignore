@@ -40,6 +40,17 @@ ENV/
 .env.development
 .env.production
 
+# Firebase
+firebase-service-account.json
+**/firebase-service-account.json
+
+# Sensitive files
+*.key
+*.pem
+*.p12
+*.keystore
+*.jkspment
+
 # 数据库
 *.db
 *.sqlite3
