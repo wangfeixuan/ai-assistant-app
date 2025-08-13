@@ -1,16 +1,19 @@
 {
-  "buildCommand": "echo 'Using pre-built Flutter Web files'",
-  "outputDirectory": "flutter_ai_assistant/build/web",
-  "installCommand": "echo 'No install needed'",
-  "framework": null,
+  "version": 2,
+  "builds": [
+    {
+      "src": "flutter_ai_assistant/build/web/**",
+      "use": "@vercel/static"
+    }
+  ],
   "routes": [
     {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))",
-      "dest": "/$1"
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|json))",
+      "dest": "/flutter_ai_assistant/build/web/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/flutter_ai_assistant/build/web/index.html"
     }
   ]
 }
